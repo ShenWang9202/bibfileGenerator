@@ -1,0 +1,6 @@
+Projection-tree reduced order modeling for fast N-body computations
+Non-asymptotic Identification of LTI Systems from a Single Trajectory
+Subspace-based identification of linear time-varying system
+Model Order Reduction for Linear and Nonlinear Systems: A System-Theoretic Perspective
+Discovering governing equations from data by sparse identification of nonlinear dynamical systems
+Identification of linear time-varying dynamical systems using hilbert transform and empirical mode decomposition method

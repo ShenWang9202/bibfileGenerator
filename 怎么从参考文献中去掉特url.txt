@@ -1,0 +1,55 @@
+修改.bst文件，将url从每一条参考文献中去掉。
+
+其实只要将 ustcthesis-authoryear.bst  中的 FUNCTION {article} 中的 output.url 注销掉就行了。见下面的代码
+
+FUNCTION {article}
+{ output.bibitem
+  output.translation
+  format.authors output
+  author format.key output
+  year.after.author
+    { period.after.author
+        'new.sentence
+        'skip$
+      if$
+      format.year "year" output.check
+    }
+    'skip$
+  if$
+  new.block
+  title.in.journal
+    { format.title "title" output.check
+      "J" set.entry.mark
+      format.mark "" output.after
+      new.block
+    }
+    'skip$
+  if$
+  format.journal "journal" output.check
+  year.after.author not
+    { format.date "year" output.check }
+    'skip$
+  if$
+  format.journal.volume output
+  format.journal.number "" output.after
+  format.journal.pages bbl.pages.colon output.after
+  format.urldate "" output.after
+  %output.url % 不适用 url
+  output.doi
+  new.block
+  format.note output
+  fin.entry
+}
+
+
+
+原网页在这：https://tex.stackexchange.com/questions/125133/remove-issn-doi-url-when-using-plainnat-and-natbib
+
+
+I agree with varepsilon that you can edit the .bst file. However I would not edit the FUNCTION {format.url}... because this will mean that the URL will never be displayed...So also not for online resources, where you actually want it!
+
+Instead, I would look for the source-specific style functions, e.g. FUNCTION {article}. There just remove the lines with format.isbn output, format.doi output, and format.url output. Do this for every style you don't want to see the ISBN/DOI/URL.
+
+Of course don't do this for FUNCTION {misc}, which is used for online resources and such...
+
+Also, remember that journal don't like you tinkering with their reference style (even if there are errors in it). You'll have to manage with the style they give you...
